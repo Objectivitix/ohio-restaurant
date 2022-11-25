@@ -1,0 +1,162 @@
+/* FONTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;1,300&family=Mukta:wght@200&display=swap');
+
+/* RESET */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+*:focus {
+  outline: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  appearance: none;
+  background: none;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: 100%;
+  color: inherit;
+  border: 0;
+}
+
+/* GLOBAL */
+
+:root {
+  --mukta: "Mukta", sans-serif;
+  --bitter: "Bitter", serif;
+
+  --fs-200: 0.750rem;
+  --fs-300: 0.875rem;
+  --fs-400: 1.000rem;
+  --fs-500: 1.125rem;
+  --fs-600: 1.250rem;
+  --fs-700: 1.500rem;
+  --fs-800: 1.750rem;
+  --fs-900: 2.000rem;
+
+  --fw-xlt: 200;
+  --fw-lgt: 300;
+  --fw-reg: 400;
+
+  --primary-light: hsl(60 100% 99%);
+  --primary-dark: hsl(240 16% 9%);
+  --accent-light: hsl(60 100% 80%);
+  --accent-dark: hsl(60 64% 20%);
+}
+
+body {
+  --bg-clr: var(--primary-dark);
+  --text-clr: var(--primary-light);
+  --acc-text-clr: var(--accent-light);
+}
+
+body.light {
+  --bg-clr: var(--primary-light);
+  --text-clr: var(--primary-dark);
+  --acc-text-clr: var(--accent-dark);
+}
+
+button {
+  cursor: pointer;
+}
+
+/* HOME PAGE */
+
+.content {
+  background-color: var(--bg-clr);
+  font-family: var(--bitter);
+  font-weight: var(--fw-lgt);
+  color: var(--text-clr);
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.tabs {
+  width: min(60vw, 400px);
+  display: flex;
+  justify-content: space-between;
+}
+
+.tabs button {
+  cursor: pointer;
+}
+
+.tabs button:hover {
+  box-shadow: 0 1px 0 var(--text-clr);
+}
+
+.tabs p {
+  font-size: var(--fs-200);
+  text-transform: uppercase;
+  transition: transform 500ms;
+}
+
+.tabs button:hover > p {
+  transform: translateY(-9px);
+}
+
+.titles {
+  color: var(--acc-text-clr);
+  line-height: 1.7em;
+  text-transform: lowercase;
+}
+
+.titles > h1 {
+  font-family: var(--mukta);
+  font-size: var(--fs-900);
+  font-weight: var(--fw-xlt);
+  letter-spacing: 0.05ch;
+}
+
+.titles > p {
+  font-size: var(--fs-200);
+  font-style: italic;
+}
+
+.home-image {
+  width: min(65vw, 500px);
+}
+
+.cta-button {
+  position: relative;
+  font-size: var(--fs-200);
+  font-weight: var(--fw-reg);
+  text-transform: uppercase;
+}
+
+.cta-button:hover { text-decoration: underline; }
+.cta-button:active { text-decoration: none; }
+
+.cta-button::before,
+.cta-button::after {
+  position: absolute;
+  content: "|";
+  transition: transform 1000ms;
+}
+
+.cta-button::before { left: -1.25rem; }
+.cta-button::after { right: -1.25rem; }
+
+.cta-button:hover::before { transform: translateX(max(-8vh, -5rem)); }
+.cta-button:hover::after { transform: translateX(min(8vh, 5rem)); }

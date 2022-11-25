@@ -1,1 +1,4 @@
-console.log("Build and deploy successful!");
+import createHomePage from "./pages/home";
+import "./styles.css";
+
+createHomePage();
