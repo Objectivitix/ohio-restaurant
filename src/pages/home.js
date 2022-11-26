@@ -1,24 +1,6 @@
 import { createElement } from "../utils";
 import homeImage from "../assets/images/restaurant.jpg";
 
-function createTab(name) {
-  const tab = createElement("li", {className: name.toLowerCase()});
-  const button = createElement("button", {className: "link-like"});
-  const text = createElement("p", {textContent: name});
-
-  button.appendChild(text);
-  tab.appendChild(button);
-
-  return tab;
-}
-
-function createTabs(...names) {
-  const tabs = createElement("ul", {className: "tabs"});
-  names.forEach(title => tabs.appendChild(createTab(title)));
-
-  return tabs;
-}
-
 function createTitles(title, slogan) {
   const titles = createElement("div", {className: "titles"});
   const h1 = createElement("h1", {textContent: title});
@@ -44,11 +26,10 @@ function createCTAButton(phrase) {
   return button;
 }
 
-export default function createHomePage() {
-  const container = document.querySelector(".content");
+export function populate() {
+  const main = document.querySelector("main");
 
-  container.appendChild(createTabs("Home", "Menu", "Events"));
-  container.appendChild(createTitles("Ohio Restaurant", "Serving excellence since 1969"));
-  container.appendChild(createHomeImage(homeImage));
-  container.appendChild(createCTAButton("Experience Greatness"));
+  main.appendChild(createTitles("Ohio Restaurant", "Serving excellence since 1969"));
+  main.appendChild(createHomeImage(homeImage));
+  main.appendChild(createCTAButton("Experience Greatness"));
 }

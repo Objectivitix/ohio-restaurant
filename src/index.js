@@ -1,4 +1,6 @@
-import createHomePage from "./pages/home";
+import * as header from "./header";
+import * as home from "./pages/home";
 import "./styles.css";
 
-createHomePage();
+header.populate();
+home.populate();

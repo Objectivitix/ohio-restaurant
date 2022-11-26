@@ -58,6 +58,12 @@ button {
   --primary-dark: hsl(240 16% 9%);
   --accent-light: hsl(60 100% 80%);
   --accent-dark: hsl(60 64% 20%);
+
+  --td-xst: 200ms;
+  --td-sht: 250ms;
+  --td-med: 300ms;
+  --td-lng: 500ms;
+  --td-xln: 1000ms;
 }
 
 body {
@@ -76,7 +82,7 @@ button {
   cursor: pointer;
 }
 
-/* HOME PAGE */
+/* INITIALISE */
 
 .content {
   background-color: var(--bg-clr);
@@ -87,10 +93,25 @@ button {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 12vh;
+}
+
+header {
+  flex: 1;
+  display: flex;
   justify-content: center;
+  align-items: flex-end;
+}
+
+main {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 3rem;
 }
+
+/* HEADER */
 
 .tabs {
   width: min(60vw, 400px);
@@ -109,12 +130,14 @@ button {
 .tabs p {
   font-size: var(--fs-200);
   text-transform: uppercase;
-  transition: transform 500ms;
+  transition: transform var(--td-med);
 }
 
 .tabs button:hover > p {
   transform: translateY(-9px);
 }
+
+/* HOME PAGE */
 
 .titles {
   color: var(--acc-text-clr);
@@ -152,7 +175,7 @@ button {
 .cta-button::after {
   position: absolute;
   content: "|";
-  transition: transform 1000ms;
+  transition: transform var(--td-xln);
 }
 
 .cta-button::before { left: -1.25rem; }
