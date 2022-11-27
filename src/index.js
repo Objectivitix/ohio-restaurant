@@ -3,4 +3,6 @@ import * as home from "./pages/home";
 import "./styles.css";
 
 header.populate();
+header.bind();
+
 home.populate();

@@ -1,14 +1,15 @@
-import { createElement } from "./utils";
+import { createElement, capitalize } from "./utils";
 import * as home from "./pages/home";
 import * as menu from "./pages/menu";
 import * as events from "./pages/events";
 
-const TAB_BINDING_MAP = {};
+const tabBindings = {};
+let currentTab;
 
 function createTab(name) {
-  const tab = createElement("li", {className: name.toLowerCase()});
+  const tab = createElement("li", {dataset: {name}});
   const button = createElement("button", {className: "link-like"});
-  const text = createElement("p", {textContent: name});
+  const text = createElement("p", {textContent: capitalize(name)});
 
   button.appendChild(text);
   tab.appendChild(button);
@@ -25,40 +26,42 @@ function createTabs(...names) {
 
 function unbindTabs(tabs) {
   tabs.forEach(tab => tab.querySelector("button")
-    .removeEventListener("click", TAB_BINDING_MAP[tab.classList[0]]));
+    .removeEventListener("click", tabBindings[tab.dataset.name]));
 }
 
-function bindOtherTabs(tabs, selectedTab) {
+function bindTabs(tabs) {
   tabs.forEach(tab => {
-    if (tab.classList[0] !== selectedTab.classList[0])
-      tab.querySelector("button")
-        .addEventListener("click", TAB_BINDING_MAP[tab.classList[0]]);
+    const name = tab.dataset.name;
+
+    if (name === currentTab) return;
+
+    tab.querySelector("button")
+      .addEventListener("click", tabBindings[name]);
   });
 }
 
-function bindTab(header, tabName, callbackFn) {
-  const tabs = header.querySelectorAll("li");
-
-  const className = tabName.toLowerCase();
-  const selectedTab = header.querySelector(`.${className}`);
-
-  TAB_BINDING_MAP[className] = callbackFn;
-
-  selectedTab
-    .querySelector("button")
-    .addEventListener("click", () => {
-      callbackFn();
-      unbindTabs(tabs);
-      bindOtherTabs(tabs, selectedTab);
-    });
+function addTabBinding(tabs, name, callbackFn) {
+  tabBindings[name] = function() {
+    currentTab = name;
+    callbackFn();
+    unbindTabs(tabs);
+    bindTabs(tabs);
+  }
 }
 
 export function populate() {
   const header = document.querySelector("header");
 
-  header.appendChild(createTabs("Home", "Menu", "Events"));
+  header.appendChild(createTabs("home", "menu", "events"));
+}
 
-  bindTab(header, "Home", home.populate);
-  bindTab(header, "Menu", menu.populate);
-  bindTab(header, "Events", events.populate);
+export function bind() {
+  const header = document.querySelector("header");
+  const tabs = header.querySelectorAll("li");
+
+  addTabBinding(tabs, "home", home.populate);
+  addTabBinding(tabs, "menu", menu.populate);
+  addTabBinding(tabs, "events", events.populate);
+
+  bindTabs(tabs);
 }
