@@ -28,6 +28,7 @@ function createCTAButton(phrase) {
 
 export function populate() {
   const main = document.querySelector("main");
+  main.innerHTML = "";
 
   main.appendChild(createTitles("Ohio Restaurant", "Serving excellence since 1969"));
   main.appendChild(createHomeImage(homeImage));
