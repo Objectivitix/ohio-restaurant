@@ -1,16 +1,6 @@
-import { createElement } from "../utils";
+import { clearElement, createElement, createTitles } from "../utils";
+import * as menu from "./menu";
 import homeImage from "../assets/images/restaurant.jpg";
-
-function createTitles(title, slogan) {
-  const titles = createElement("div", {className: "titles"});
-  const h1 = createElement("h1", {textContent: title});
-  const p = createElement("p", {textContent: slogan});
-
-  titles.appendChild(h1);
-  titles.appendChild(p);
-
-  return titles;
-}
 
 function createHomeImage(image) {
   const img = createElement("img",
@@ -26,11 +16,22 @@ function createCTAButton(phrase) {
   return button;
 }
 
-export function populate() {
-  const main = document.querySelector("main");
-  main.innerHTML = "";
+function populate(element) {
+  element.appendChild(createTitles("Ohio Restaurant", "Serving excellence since 1969"));
+  element.appendChild(createHomeImage(homeImage));
+  element.appendChild(createCTAButton("Experience Greatness"));
+}
 
-  main.appendChild(createTitles("Ohio Restaurant", "Serving excellence since 1969"));
-  main.appendChild(createHomeImage(homeImage));
-  main.appendChild(createCTAButton("Experience Greatness"));
+function bind(element) {
+  const button = element.querySelector(".cta-button");
+
+  button.addEventListener("click", menu.set);
+}
+
+export function set() {
+  const main = document.querySelector("main");
+
+  clearElement(main);
+  populate(main);
+  bind(main);
 }

@@ -1,3 +1,11 @@
+function popProperty(obj, prop) {
+  const value = obj?.[prop];
+
+  delete obj?.[prop];
+
+  return value;
+}
+
 export function createElement(tagName, attributes) {
   const el = document.createElement(tagName);
 
@@ -21,15 +29,22 @@ export function createElement(tagName, attributes) {
   return el;
 }
 
+export function createTitles(title, slogan) {
+  const titles = createElement("div", {className: "titles"});
+  const h1 = createElement("h1", {textContent: title});
+  const p = createElement("p", {textContent: slogan});
+
+  titles.appendChild(h1);
+  titles.appendChild(p);
+
+  return titles;
+}
+
 export function capitalize(string) {
   return string[0].toUpperCase()
     + string.slice(1).toLowerCase();
 }
 
-export function popProperty(obj, prop) {
-  const value = obj?.[prop];
-
-  delete obj?.[prop];
-
-  return value;
+export function clearElement(el) {
+  el.innerHTML = "";
 }

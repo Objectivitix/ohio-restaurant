@@ -1,6 +1,6 @@
 /* FONTS */
 
-@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;1,300&family=Mukta:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;0,500;1,300&family=Mukta:wght@200&display=swap');
 
 /* RESET */
 
@@ -53,6 +53,7 @@ button {
   --fw-xlt: 200;
   --fw-lgt: 300;
   --fw-reg: 400;
+  --fw-med: 500;
 
   --primary-light: hsl(60 100% 99%);
   --primary-dark: hsl(240 16% 9%);
@@ -70,6 +71,9 @@ body {
   --bg-clr: var(--primary-dark);
   --text-clr: var(--primary-light);
   --acc-text-clr: var(--accent-light);
+
+  --scrollbar-track-clr: hsl(240 10% 25%);
+  --scrollbar-thumb-clr: hsl(0 0% 72%);
 }
 
 body.light {
@@ -93,7 +97,7 @@ button {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 12vh;
+  gap: 14vh;
 }
 
 header {
@@ -104,7 +108,7 @@ header {
 }
 
 main {
-  flex: 4;
+  flex: 6;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,7 +127,8 @@ main {
   cursor: pointer;
 }
 
-.tabs button:hover {
+.tabs button:hover,
+.tabs > li.current > button {
   box-shadow: 0 1px 0 var(--text-clr);
 }
 
@@ -133,11 +138,12 @@ main {
   transition: transform var(--td-med);
 }
 
-.tabs button:hover > p {
+.tabs button:hover > p,
+.tabs > li.current p {
   transform: translateY(-9px);
 }
 
-/* HOME PAGE */
+/* PAGE TITLES */
 
 .titles {
   color: var(--acc-text-clr);
@@ -157,6 +163,8 @@ main {
   font-style: italic;
 }
 
+/* HOME PAGE */
+
 .home-image {
   width: min(65vw, 500px);
 }
@@ -168,8 +176,13 @@ main {
   text-transform: uppercase;
 }
 
-.cta-button:hover { text-decoration: underline; }
-.cta-button:active { text-decoration: none; }
+.cta-button:hover {
+  text-decoration: underline;
+}
+
+.cta-button:active {
+  text-decoration: none;
+}
 
 .cta-button::before,
 .cta-button::after {
@@ -178,8 +191,138 @@ main {
   transition: transform var(--td-xln);
 }
 
-.cta-button::before { left: -1.25rem; }
-.cta-button::after { right: -1.25rem; }
+.cta-button::before {
+  left: -1.25rem;
+}
 
-.cta-button:hover::before { transform: translateX(max(-8vh, -5rem)); }
-.cta-button:hover::after { transform: translateX(min(8vh, 5rem)); }
+.cta-button::after {
+  right: -1.25rem;
+}
+
+.cta-button:hover::before {
+  transform: translateX(max(-8vh, -5rem));
+}
+
+.cta-button:hover::after {
+  transform: translateX(min(8vh, 5rem));
+}
+
+/* MENU PAGE */
+
+.menu-wrapper {
+  width: 100%;
+  height: 45vh;
+  /* compensate for tasting-menu margin */
+  margin-top: -1.5rem;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+.menu-wrapper::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-clr);
+  border-radius: 8px;
+}
+
+.menu-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-clr);
+  border-radius: 8px;
+}
+
+.tasting-menu {
+  width: min(65vw, 500px);
+  /* give space for amuse-bouche image */
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.125rem;
+}
+
+.tasting-menu > hr {
+  background-color: var(--text-clr);
+  width: 50%;
+  height: 1px;
+  border: 0;
+  flex-shrink: 0;
+}
+
+.tasting-menu > li {
+  position: relative;
+  width: 100%;
+}
+
+.tasting-menu > li > div {
+  position: absolute;
+  isolation: isolate;
+  top: 0;
+}
+
+.tasting-menu > li:nth-of-type(2n+1) > div {
+  left: max(-8vw, -88px);
+  transform: translateX(-100%);
+}
+
+.tasting-menu > li:nth-of-type(2n) > div {
+  right: max(-8vw, -88px);
+  transform: translateX(100%);
+}
+
+.tasting-menu h2 {
+  /* facilitate alignment */
+  width: 200px;
+  font-family: var(--mukta);
+  font-size: var(--fs-400);
+  font-weight: var(--fw-xlt);
+  text-transform: lowercase;
+}
+
+.tasting-menu > li:nth-of-type(2n+1) h2 {
+  text-align: right;
+}
+
+.tasting-menu > li:nth-of-type(2n) h2 {
+  text-align: left;
+}
+
+.tasting-menu img {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  width: 8rem;
+  height: 4.5rem;
+  opacity: 0.35;
+  transition: opacity var(--td-lng);
+}
+
+.tasting-menu div:hover > img,
+.tasting-menu img:hover {
+  z-index: 1;
+  opacity: 1;
+}
+
+.tasting-menu > li:nth-of-type(2n+1) img {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tasting-menu > li:nth-of-type(2n) img {
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.tasting-menu h3 {
+  font-size: var(--fs-200);
+  font-weight: var(--fw-med);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.tasting-menu p {
+  font-size: var(--fs-200);
+  text-transform: lowercase;
+}

@@ -1,6 +1,12 @@
-export function populate() {
-  const main = document.querySelector("main");
-  main.innerHTML = "";
+import { clearElement } from "../utils";
 
-  main.textContent = "hi from events";
+function populate(element) {
+  element.textContent = "hi from events";
+}
+
+export function set() {
+  const main = document.querySelector("main");
+
+  clearElement(main);
+  populate(main);
 }
