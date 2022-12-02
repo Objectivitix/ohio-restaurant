@@ -1,13 +1,14 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./src/index.js",
-  devtool: "inline-source-map",
   plugins: [
     new HTMLWebpackPlugin({
       template: "./src/skeleton.html",
     }),
+    new MiniCSSExtractPlugin(),
   ],
   output: {
     filename: "main.js",
@@ -18,7 +19,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCSSExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
