@@ -14,17 +14,12 @@ import desertsImage from "../assets/images/menu/11-deserts.gif";
 
 function createCourse(title, image, name, description) {
   const course = createElement("li");
-  const side = createElement("div");
 
-  const h2 = createElement("h2", {textContent: title});
   const img = createElement("img", {src: image});
   const h3 = createElement("h3", {textContent: name});
   const p = createElement("p", {textContent: description});
 
-  side.appendChild(h2);
-  side.appendChild(img);
-
-  course.appendChild(side);
+  course.appendChild(img);
   course.appendChild(h3);
   course.appendChild(p);
 
