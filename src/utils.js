@@ -30,7 +30,7 @@ export function createElement(tagName, attributes) {
 }
 
 export function createTitles(title, slogan) {
-  const titles = createElement("div", {className: "titles"});
+  const titles = createElement("div", {className: "page-titles"});
   const h1 = createElement("h1", {textContent: title});
   const p = createElement("p", {textContent: slogan});
 

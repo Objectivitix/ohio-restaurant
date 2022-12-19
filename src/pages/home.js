@@ -1,5 +1,6 @@
 import { clearElement, createElement, createTitles } from "../utils";
 import * as menu from "./menu";
+
 import homeImage from "../assets/images/restaurant.jpg";
 
 function createHomeImage(image) {
